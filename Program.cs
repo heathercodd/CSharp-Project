@@ -1,4 +1,5 @@
-﻿using CSharp_Project.Menus;
+﻿using CSharp_Project.Controllers;
+using CSharp_Project.Menus;
 using System;
 
 namespace CSharp_Project
@@ -11,7 +12,7 @@ namespace CSharp_Project
             Console.ForegroundColor = ConsoleColor.Yellow;
 
             //runs the main menu 
-            SaleMenu myMenu = new SaleMenu();
+            SaleMenu myMenu = new SaleMenu(new SaleController());
             myMenu.RunMainMenu();
 
 
