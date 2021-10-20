@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharp_Project.Menus;
+using System;
 
 namespace CSharp_Project
 {
@@ -6,7 +7,15 @@ namespace CSharp_Project
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            //console text will be yellow
+            Console.ForegroundColor = ConsoleColor.Yellow;
+
+            //runs the main menu 
+            SaleMenu myMenu = new SaleMenu();
+            myMenu.RunMainMenu();
+
+
+
         }
     }
 }
