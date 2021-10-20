@@ -6,4 +6,18 @@
     <RootNamespace>CSharp_Project</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\schema.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\schema.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.27" />
+  </ItemGroup>
+
 </Project>
