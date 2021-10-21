@@ -19,15 +19,16 @@ namespace CSharp_Project
             SaleMenu myMenu = new SaleMenu(new SaleController(new SaleService()));
             myMenu.RunMainMenu();
 
-            /*
             
-            //to create my sale table in the database 
+            /* 
+             
+            //creating the sales table in the database 
             MySqlConnection connection = MySqlUtils.GetSqlConnection();
             connection.Open();
             MySqlUtils.RunSchemaFile(Environment.CurrentDirectory + @"\Resources\schema.sql", connection);
             connection.Dispose();
 
-            */
+            */            
 
 
         }
