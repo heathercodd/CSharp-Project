@@ -1,4 +1,5 @@
 ﻿using CSharp_Project.Controllers;
+using CSharp_Project.Data.Repositories;
 using CSharp_Project.Menus;
 using CSharp_Project.Services;
 using CSharp_Project.Utils;
@@ -16,7 +17,7 @@ namespace CSharp_Project
 
             
             //runs the main menu 
-            SaleMenu myMenu = new SaleMenu(new SaleController(new SaleService()));
+            SaleMenu myMenu = new SaleMenu(new SaleController(new SaleService(new SaleRepository())));
             myMenu.RunMainMenu();
 
             

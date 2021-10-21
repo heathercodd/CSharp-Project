@@ -71,7 +71,7 @@ namespace CSharp_Project.Controllers
                 {                     
                     if (sale.SaleDate.Year == saleyear)
                     {
-                        Console.WriteLine($"Product: {sale.ProductName}, Qty: {sale.Quantity}, Price: {sale.Price}, Date: {sale.SaleDate}");
+                        Console.WriteLine($"{sale}");
                     }                   
                     
                 }

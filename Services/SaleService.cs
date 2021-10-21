@@ -1,4 +1,5 @@
 ﻿using CSharp_Project.Data.Model;
+using CSharp_Project.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,27 +11,23 @@ namespace CSharp_Project.Services
     class SaleService
     {
         //setting up 
-        private readonly IList<Sale> sales;
-        public SaleService()
+        private readonly SaleRepository saleRepository;
+        public SaleService(SaleRepository saleRepository)
         {
-            sales = new List<Sale>();
+            this.saleRepository = saleRepository;
         }
-        //creating the SaleID 
-        private static int id;
 
-        //data entry
+        //data entry - linking to repository
         internal Sale DataEntry(Sale dataToEnter)
         {
-            dataToEnter.SaleID = id;
-            id++;
-            sales.Add(dataToEnter);
-            return dataToEnter;
+            Sale myNewSale = saleRepository.DataEntry(dataToEnter);
+            return myNewSale;
         }
 
-        //sales by year report
+        //sales by year report - linking to repository
         internal IEnumerable<Sale> Report1()
-        {
-            return sales;
+        {            
+            return saleRepository.Report1();
         } 
 
 
