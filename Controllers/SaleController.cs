@@ -1,4 +1,5 @@
 ﻿using CSharp_Project.Data.Model;
+using CSharp_Project.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,15 @@ namespace CSharp_Project.Controllers
     class SaleController
     {
         //setting up
-        private readonly IList<Sale> sales;
-        public SaleController()
+        private readonly SaleService saleService;
+        public SaleController(SaleService saleService)
         {
-            sales = new List<Sale>();
+            this.saleService = saleService;
         }
 
         //Data Entry Method
         public void DataEntrySale()
-        {
+        {               
             Console.WriteLine("What is the product name?");
             string productname = Console.ReadLine();
             Console.WriteLine("What is the quantity?");
@@ -28,16 +29,21 @@ namespace CSharp_Project.Controllers
             Console.WriteLine("What is the date of the sale?");
             DateTime saledate = DateTime.Parse(Console.ReadLine());
 
-            Sale myNewSale = new Sale(productname, quantity, price, saledate);
-            sales.Add(myNewSale);
-            Console.WriteLine($"A new sale has been recorded: {myNewSale.ProductName}");
+            //this is the data to enter
+            Sale dataToEnter = new Sale() { ProductName = productname, Quantity = quantity, Price = price, SaleDate = saledate };
+            
+            //passing the data to the service level to be added 
+            Sale myNewSale = saleService.DataEntry(dataToEnter);
+                       
+            Console.WriteLine($"A new sale has been recorded: {myNewSale}");
             Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadKey();
 
         }
 
+        
         //Report methods
-
+                
 
         //sales by year report
         public void Report1()
@@ -57,8 +63,11 @@ namespace CSharp_Project.Controllers
                 Console.WriteLine();
                 Console.WriteLine();
 
+                //pass to service level 
+                IEnumerable<Sale> salesInDatabase = saleService.Report1();
 
-                foreach (var sale in sales)
+                //if the year of a sale matches the user-selected year, show the sale
+                foreach (var sale in salesInDatabase)
                 {                     
                     if (sale.SaleDate.Year == saleyear)
                     {
@@ -81,7 +90,7 @@ namespace CSharp_Project.Controllers
            
         }
 
-
+        
 
     }
 

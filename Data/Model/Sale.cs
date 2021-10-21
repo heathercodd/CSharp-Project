@@ -76,13 +76,10 @@ namespace CSharp_Project.Data.Model
             }
         }
 
-       
-        public Sale(string productname, int quantity, double price, DateTime saledate)
+        //changing the information that will be displayed for our sale
+        public override string ToString()
         {
-            ProductName = productname;
-            Quantity = quantity;
-            Price = price;
-            SaleDate = saledate;
+            return $"SaleID = {SaleID}, Product Name = {ProductName}, Quantity = {Quantity}, Price = {Price}, Sale Date = {SaleDate}";
         }
 
 
