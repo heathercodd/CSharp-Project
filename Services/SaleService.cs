@@ -24,12 +24,37 @@ namespace CSharp_Project.Services
             return myNewSale;
         }
 
+        //reports
+
+        //all sales report - linking to repository
+        internal IEnumerable<Sale> Report0()
+        {
+            return saleRepository.Report0();
+        }
+
         //sales by year report - linking to repository
         internal IEnumerable<Sale> Report1(int saleyear)
         {            
             return saleRepository.Report1(saleyear);
-        } 
+        }
 
+        //sales by month and year report - linking to repository
+        internal IEnumerable<Sale> Report2(int salemonth, int saleyear)
+        {
+            return saleRepository.Report2(salemonth, saleyear);
+        }
+
+        //total sales by year report - linking to repository 
+        internal Total Report3(int saleyear)
+        {
+            return saleRepository.Report3(saleyear);
+        }
+
+        //total sales by month and year report - linking to repository 
+        internal Total Report4(int salemonth, int saleyear)
+        {
+            return saleRepository.Report4(salemonth, saleyear);
+        }
 
 
 

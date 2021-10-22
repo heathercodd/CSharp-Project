@@ -93,13 +93,13 @@ namespace CSharp_Project.Menus
 
         }
 
-        //SUB MENU 
+        //REPORT SUB MENU 
 
         //this is how the report submenu will be displayed 
         public static void DisplayReportSubmenu()
         {
             Console.WriteLine("Reports:");
-            Console.WriteLine("\n 1. Sales by Year \n 2. Sales by Month and Year \n 3. Total Sales by Year \n 4. Total Sales by Year and Month");
+            Console.WriteLine("\n 0. All Sales \n 1. Sales by Year \n 2. Sales by Month and Year \n 3. Total Sales by Year \n 4. Total Sales by Year and Month");
             for (int i = 0; i < 5; i++)
             {
                 Console.WriteLine();
@@ -119,17 +119,20 @@ namespace CSharp_Project.Menus
 
                 switch (userinput)
                 {
+                    case "0":
+                        saleController.Report0();
+                        break;
                     case "1":
                         saleController.Report1();
                         break;
                     case "2":
-                        Console.WriteLine("two");
+                        saleController.Report2();
                         break;
                     case "3":
-                        Console.WriteLine("three");
+                        saleController.Report3();
                         break;
                     case "4":
-                        Console.WriteLine("four");
+                        saleController.Report4();
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
