@@ -244,6 +244,50 @@ namespace CSharp_Project.Data.Repositories
             return sales;
         }
 
+        //month with highest sales by year report
+        internal MonthOfYear Report9(int saleyear)
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            //SQL statement to filter for month with highest sales in the year selected by the user
+            command.CommandText = $"SELECT MONTH(saledate) AS months, SUM(quantity*price) as monthsales FROM sale WHERE YEAR(saledate) = @saleyear GROUP BY MONTH(saledate) ORDER BY SUM(quantity*price) DESC LIMIT 1;";
+            command.Parameters.AddWithValue("@saleyear", saleyear);
+            Connection.Open();
+            command.Prepare();
+            //read from SQL and assign to the MonthOfYear class 
+            MySqlDataReader reader = command.ExecuteReader();
+            reader.Read();
+
+            int months = reader.GetFieldValue<int>("months");
+            decimal monthsales = reader.GetFieldValue<decimal>("monthsales");
+
+            MonthOfYear monthofyear = new MonthOfYear() { MyMonthOfYear = months, MonthlySales =  monthsales};
+            Connection.Dispose();
+            return monthofyear;
+        }
+
+        //month with lowest sales by year report
+        internal MonthOfYear Report10(int saleyear)
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            //SQL statement to filter for month with lowest sales in the year selected by the user
+            command.CommandText = $"SELECT MONTH(saledate) AS months, SUM(quantity*price) as monthsales FROM sale WHERE YEAR(saledate) = @saleyear GROUP BY MONTH(saledate) ORDER BY SUM(quantity*price) ASC LIMIT 1;";
+            command.Parameters.AddWithValue("@saleyear", saleyear);
+            Connection.Open();
+            command.Prepare();
+            //read from SQL and assign to the MonthOfYear class 
+            MySqlDataReader reader = command.ExecuteReader();
+            reader.Read();
+
+            int months = reader.GetFieldValue<int>("months");
+            decimal monthsales = reader.GetFieldValue<decimal>("monthsales");
+
+            MonthOfYear monthofyear = new MonthOfYear() { MyMonthOfYear = months, MonthlySales = monthsales };
+            Connection.Dispose();
+            return monthofyear;
+        }
+
+
+
 
 
 

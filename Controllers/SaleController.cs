@@ -234,8 +234,6 @@ namespace CSharp_Project.Controllers
             }
         }
 
-
-
         //Sales Between Selected Year and Selected Year Report
         public void Report5()
         {
@@ -277,7 +275,6 @@ namespace CSharp_Project.Controllers
 
             }
         }
-
 
         //Sales Between Selected Month/Year and Selected Month/Year Report
         public void Report6()
@@ -337,6 +334,70 @@ namespace CSharp_Project.Controllers
             }
         }
 
+        //Month with Highest Sales by Year Report
+        public void Report9()
+        {
+            bool inReport9 = true;
+            while (inReport9)
+            {
+                Console.Clear();
+                Console.WriteLine("Month with Highest Sales by Year Report");
+                Console.WriteLine();
+                Console.WriteLine("Please type the year that you would like to see:");
+                Console.WriteLine();
+                int saleyear = Convert.ToInt32(Console.ReadLine());
+
+                Console.Clear();
+                Console.WriteLine($"Month with Highest Sales in {saleyear}");
+                Console.WriteLine();
+                Console.WriteLine();
+
+                MonthOfYear myMonth = saleService.Report9(saleyear);
+                Console.WriteLine($"{myMonth}");
+
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.WriteLine();
+                }
+                Console.WriteLine("Press any key to return.");
+                Console.ReadKey();
+                continue;
+
+            }
+        }
+
+
+        //Month with Lowest Sales by Year Report
+        public void Report10()
+        {
+            bool inReport10 = true;
+            while (inReport10)
+            {
+                Console.Clear();
+                Console.WriteLine("Month with Lowest Sales by Year Report");
+                Console.WriteLine();
+                Console.WriteLine("Please type the year that you would like to see:");
+                Console.WriteLine();
+                int saleyear = Convert.ToInt32(Console.ReadLine());
+
+                Console.Clear();
+                Console.WriteLine($"Month with Lowest Sales in {saleyear}");
+                Console.WriteLine();
+                Console.WriteLine();
+
+                MonthOfYear myMonth = saleService.Report10(saleyear);
+                Console.WriteLine($"{myMonth}");
+
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.WriteLine();
+                }
+                Console.WriteLine("Press any key to return.");
+                Console.ReadKey();
+                continue;
+
+            }
+        }
 
 
 
@@ -348,4 +409,18 @@ namespace CSharp_Project.Controllers
 
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+

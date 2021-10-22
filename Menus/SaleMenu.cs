@@ -150,10 +150,10 @@ namespace CSharp_Project.Menus
                         //saleController.Report8();
                         break;
                     case "9":
-                        //saleController.Report9();
+                        saleController.Report9();
                         break;
                     case "10":
-                        //saleController.Report10();
+                        saleController.Report10();
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;

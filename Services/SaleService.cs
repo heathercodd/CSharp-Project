@@ -68,6 +68,18 @@ namespace CSharp_Project.Services
             return saleRepository.Report6(datefrom, dateto);
         }
 
+        //month with highest sales by year report - linking to repository
+        internal MonthOfYear Report9(int saleyear)
+        {
+            return saleRepository.Report9(saleyear);
+        }
+
+        //month with lowest sales by year report - linking to repository
+        internal MonthOfYear Report10(int saleyear)
+        {
+            return saleRepository.Report10(saleyear);
+        }
+
 
 
 
