@@ -25,9 +25,9 @@ namespace CSharp_Project.Services
         }
 
         //sales by year report - linking to repository
-        internal IEnumerable<Sale> Report1()
+        internal IEnumerable<Sale> Report1(int saleyear)
         {            
-            return saleRepository.Report1();
+            return saleRepository.Report1(saleyear);
         } 
 
 

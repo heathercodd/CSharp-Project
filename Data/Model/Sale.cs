@@ -12,7 +12,7 @@ namespace CSharp_Project.Data.Model
         private int saleID;
         private string productName;
         private int quantity;
-        private double price;
+        private decimal price;
         private DateTime saleDate;
 
         //getting and setting the fields
@@ -52,7 +52,7 @@ namespace CSharp_Project.Data.Model
             }
         }
 
-        public double Price
+        public decimal Price
         {
             get
             {

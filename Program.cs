@@ -17,7 +17,7 @@ namespace CSharp_Project
 
             
             //runs the main menu 
-            SaleMenu myMenu = new SaleMenu(new SaleController(new SaleService(new SaleRepository())));
+            SaleMenu myMenu = new SaleMenu(new SaleController(new SaleService(new SaleRepository(MySqlUtils.GetSqlConnection()))));
             myMenu.RunMainMenu();
 
             
