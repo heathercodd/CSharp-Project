@@ -99,7 +99,10 @@ namespace CSharp_Project.Menus
         public static void DisplayReportSubmenu()
         {
             Console.WriteLine("Reports:");
-            Console.WriteLine("\n 0. All Sales \n 1. Sales by Year \n 2. Sales by Month and Year \n 3. Total Sales by Year \n 4. Total Sales by Year and Month");
+            Console.WriteLine("\n 0. All Sales \n 1. Sales by Year \n 2. Sales by Month and Year \n 3. Total Sales by Year " +
+                "\n 4. Total Sales by Year and Month \n 5. Sales Between Selected Year and Selected Year " +
+                "\n 6. Sales Between Selected Month / Year and Selected Month / Year \n 7. Average Sales for a Given Month Over Selected Number of Years " +
+                "\n 8. Average Sales in a Month by Year \n 9. Month with Highest Sales by Year \n 10. Month with Lowest Sales by Year ");
             for (int i = 0; i < 5; i++)
             {
                 Console.WriteLine();
@@ -133,6 +136,24 @@ namespace CSharp_Project.Menus
                         break;
                     case "4":
                         saleController.Report4();
+                        break;
+                    case "5":
+                        saleController.Report5();
+                        break;
+                    case "6":
+                        saleController.Report6();
+                        break;
+                    case "7":
+                        //saleController.Report7();
+                        break;
+                    case "8":
+                        //saleController.Report8();
+                        break;
+                    case "9":
+                        //saleController.Report9();
+                        break;
+                    case "10":
+                        //saleController.Report10();
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;

@@ -56,7 +56,17 @@ namespace CSharp_Project.Services
             return saleRepository.Report4(salemonth, saleyear);
         }
 
+        //sales between selected year and selected year report - linking to repository
+        internal IEnumerable<Sale> Report5(int saleyearfrom, int saleyearto)
+        {
+            return saleRepository.Report5(saleyearfrom, saleyearto);
+        }
 
+        //sales between selected month/year and selected month/year report - linking to repository
+        internal IEnumerable<Sale> Report6(DateTime datefrom, DateTime dateto)
+        {
+            return saleRepository.Report6(datefrom, dateto);
+        }
 
 
 

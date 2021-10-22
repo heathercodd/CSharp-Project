@@ -36,13 +36,9 @@ namespace CSharp_Project.Controllers
             Console.WriteLine();
             decimal price = Convert.ToDecimal(Console.ReadLine());
             Console.WriteLine();
-            Console.WriteLine("What is the date of the sale?");
-            Console.WriteLine();
-            DateTime saledate = DateTime.Parse(Console.ReadLine());
-            Console.WriteLine();
-
+           
             //this is the data to enter
-            Sale dataToEnter = new Sale() { ProductName = productname, Quantity = quantity, Price = price, SaleDate = saledate };
+            Sale dataToEnter = new Sale() { ProductName = productname, Quantity = quantity, Price = price };
             
             //passing the data to the service level to be added 
             Sale myNewSale = saleService.DataEntry(dataToEnter);
@@ -77,12 +73,10 @@ namespace CSharp_Project.Controllers
                 {
                     Console.WriteLine($"{sale}");
                 }
-
                 for (int i = 0; i < 5; i++)
                 {
                     Console.WriteLine();
                 }
-                Console.WriteLine("Press any key to return.");
                 Console.ReadKey();
                 continue;
 
@@ -242,10 +236,106 @@ namespace CSharp_Project.Controllers
 
 
 
+        //Sales Between Selected Year and Selected Year Report
+        public void Report5()
+        {
+            bool inReport5 = true;
+            while (inReport5)
+            {
+                Console.Clear();
+                Console.WriteLine("Sales Between Selected Year and Selected Year Report");
+                Console.WriteLine();
+                Console.WriteLine("Please type the year that you would like to see the sales FROM:");
+                Console.WriteLine();
+                int saleyearfrom = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
+                Console.WriteLine("Please type the year that you would like to see the sales TO:");
+                Console.WriteLine();
+                int saleyearto = Convert.ToInt32(Console.ReadLine());
+
+                Console.Clear();
+                Console.WriteLine($"Sales Between {saleyearfrom} and {saleyearto} Report");
+                Console.WriteLine();
+                Console.WriteLine();
+
+                //pass to service level 
+                IEnumerable<Sale> salesInDatabase = saleService.Report5(saleyearfrom, saleyearto);
+
+                //show the relevant sales
+                foreach (var sale in salesInDatabase)
+                {
+                    Console.WriteLine($"{sale}");
+                }
+
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.WriteLine();
+                }
+                Console.WriteLine("Press any key to return.");
+                Console.ReadKey();
+                continue;
+
+            }
+        }
 
 
+        //Sales Between Selected Month/Year and Selected Month/Year Report
+        public void Report6()
+        {
+            bool inReport6 = true;
+            while (inReport6)
+            {
+                Console.Clear();
+                Console.WriteLine("Sales Between Selected Month/Year and Selected Month/Year Report");
+                Console.WriteLine();
+                Console.WriteLine("Please type the number for the month that you would like to see the sales FROM:");
+                Console.WriteLine("\n 01: January \n 02: February \n 03: March \n 04: April \n 05: May \n 06: June \n 07: July \n 08: August \n 09: September \n 10: October \n 11: November \n 12: December");
+                Console.WriteLine();
+                string monthfrom = Console.ReadLine();
+                Console.WriteLine();
+                Console.WriteLine("Please type the year that you would like to see the sales FROM:");
+                Console.WriteLine();
+                string yearfrom = Console.ReadLine();
+                Console.WriteLine();
+                Console.WriteLine("Please type the number for the month that you would like to see the sales TO:");
+                Console.WriteLine("\n 01: January \n 02: February \n 03: March \n 04: April \n 05: May \n 06: June \n 07: July \n 08: August \n 09: September \n 10: October \n 11: November \n 12: December");
+                Console.WriteLine();
+                string monthto = Console.ReadLine();
+                Console.WriteLine();
+                Console.WriteLine("Please type the year that you would like to see the sales TO:");
+                Console.WriteLine();
+                string yearto = Console.ReadLine();
 
+                DateTime datefrom = DateTime.Parse($"01/{monthfrom}/{yearfrom}");
+                DateTime dateto = DateTime.Parse($"01/{monthto}/{yearto}").AddMonths(1);
 
+                Console.Clear();
+                Console.WriteLine($"Sales Between {monthfrom}/{yearfrom} and {monthto}/{yearto} Report");
+                Console.WriteLine();
+                Console.WriteLine();
+                
+                //pass to service level 
+                IEnumerable<Sale> salesInDatabase = saleService.Report6(datefrom, dateto);
+
+                //show the relevant sales
+                foreach (var sale in salesInDatabase)
+                {
+                    Console.WriteLine($"{sale}");
+                }
+
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.WriteLine();
+                }
+                
+                Console.WriteLine("Press any key to return.");
+                Console.ReadKey();
+                continue;
+               
+                
+
+            }
+        }
 
 
 

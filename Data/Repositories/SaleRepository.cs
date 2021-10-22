@@ -24,12 +24,11 @@ namespace CSharp_Project.Data.Repositories
         {
             MySqlCommand command = Connection.CreateCommand();
             //SQL command using placeholders
-            command.CommandText = $"INSERT INTO sale (productname, quantity, price, saledate) VALUES (@productname, @quantity, @price, @saledate)";
+            command.CommandText = $"INSERT INTO sale (productname, quantity, price) VALUES (@productname, @quantity, @price)";
             //assigning values to the placeholders
             command.Parameters.AddWithValue("@productname",dataToEnter.ProductName);
             command.Parameters.AddWithValue("@quantity", dataToEnter.Quantity);
-            command.Parameters.AddWithValue("@price", dataToEnter.Price);
-            command.Parameters.AddWithValue("@saledate", dataToEnter.SaleDate);
+            command.Parameters.AddWithValue("@price", dataToEnter.Price);            
             //SQL connection and query execution 
             Connection.Open();
             command.Prepare();
@@ -41,14 +40,15 @@ namespace CSharp_Project.Data.Repositories
             sale.ProductName = dataToEnter.ProductName;
             sale.Quantity = dataToEnter.Quantity;
             sale.Price = dataToEnter.Price;
-            sale.SaleDate = dataToEnter.SaleDate;
+            sale.SaleDate = DateTime.Today;
+
             return sale;
         }
 
         //report methods
 
 
-        //sales by year report
+        //all sales report
         internal IList<Sale> Report0()
         {
             MySqlCommand command = Connection.CreateCommand();
@@ -109,8 +109,6 @@ namespace CSharp_Project.Data.Repositories
             return sales;
         }
 
-
-
         //sales by month and year report
         internal IList<Sale> Report2(int salemonth, int saleyear)
         {
@@ -143,7 +141,6 @@ namespace CSharp_Project.Data.Repositories
             return sales;
         }
 
-
         //total sales by year report
         internal Total Report3(int saleyear)
         {
@@ -162,7 +159,6 @@ namespace CSharp_Project.Data.Repositories
             return total;
 
         }
-
 
         //total sales by month and year report
         internal Total Report4(int salemonth, int saleyear)
@@ -184,8 +180,77 @@ namespace CSharp_Project.Data.Repositories
 
         }
 
+        //sales between selected year and selected year report
+        internal IList<Sale> Report5(int saleyearfrom, int saleyearto)
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            //SQL WHERE statement to filter for sales between the years selected by the user
+            command.CommandText = $"SELECT * FROM sale WHERE year(saledate) >= @saleyearfrom AND year(saledate) <= @saleyearto";
+            command.Parameters.AddWithValue("@saleyearfrom", saleyearfrom);
+            command.Parameters.AddWithValue("@saleyearto", saleyearto);
+            Connection.Open();
+            command.Prepare();
+            MySqlDataReader reader = command.ExecuteReader();
+
+            //creating a list of the relevant sales 
+
+            IList<Sale> sales = new List<Sale>();
+
+            while (reader.Read())
+            {
+                int saleid = reader.GetFieldValue<int>("saleid");
+                string productname = reader.GetFieldValue<string>("productname");
+                int quantity = reader.GetFieldValue<int>("quantity");
+                decimal price = reader.GetFieldValue<decimal>("price");
+                DateTime saledate = reader.GetFieldValue<DateTime>("saledate");
+
+                Sale sale = new Sale() { SaleID = saleid, ProductName = productname, Quantity = quantity, Price = price, SaleDate = saledate };
+                sales.Add(sale);
+            }
+
+            Connection.Dispose();
+            return sales;
+        }
+
+        //sales between selected month/year and selected month/year report
+        internal IList<Sale> Report6(DateTime datefrom, DateTime dateto)
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            //SQL WHERE statement to filter for sales between the months and years selected by the user
+            command.CommandText = $"SELECT * FROM sale WHERE saledate >= @datefrom AND saledate < @dateto";
+            command.Parameters.AddWithValue("@datefrom", datefrom);
+            command.Parameters.AddWithValue("@dateto", dateto);
+            Connection.Open();
+            command.Prepare();
+            MySqlDataReader reader = command.ExecuteReader();
+
+            //creating a list of the relevant sales 
+
+            IList<Sale> sales = new List<Sale>();
+
+            while (reader.Read())
+            {
+                int saleid = reader.GetFieldValue<int>("saleid");
+                string productname = reader.GetFieldValue<string>("productname");
+                int quantity = reader.GetFieldValue<int>("quantity");
+                decimal price = reader.GetFieldValue<decimal>("price");
+                DateTime saledate = reader.GetFieldValue<DateTime>("saledate");
+
+                Sale sale = new Sale() { SaleID = saleid, ProductName = productname, Quantity = quantity, Price = price, SaleDate = saledate };
+                sales.Add(sale);
+            }
+
+            Connection.Dispose();
+            return sales;
+        }
+
+
+
 
 
 
     }
+
+
+        
 }
