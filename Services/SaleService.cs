@@ -68,6 +68,18 @@ namespace CSharp_Project.Services
             return saleRepository.Report6(datefrom, dateto);
         }
 
+        //average sales for a given month over selected number of years report - linked to repository
+        internal Average Report7(int salemonth, int numofyears)
+        {
+            return saleRepository.Report7(salemonth, numofyears);
+        }
+
+        //average sales per month by year report - linking to repository
+        internal Average Report8(int saleyear)
+        {
+            return saleRepository.Report8(saleyear);
+        }
+
         //month with highest sales by year report - linking to repository
         internal MonthOfYear Report9(int saleyear)
         {

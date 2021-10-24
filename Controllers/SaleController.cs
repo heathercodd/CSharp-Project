@@ -97,7 +97,7 @@ namespace CSharp_Project.Controllers
                 int saleyear = Convert.ToInt32(Console.ReadLine());
 
                 Console.Clear();
-                Console.WriteLine($"Sales by Year Report for {saleyear}");
+                Console.WriteLine($"Sales for {saleyear}");
                 Console.WriteLine();
                 Console.WriteLine();
 
@@ -140,7 +140,7 @@ namespace CSharp_Project.Controllers
                 int saleyear = Convert.ToInt32(Console.ReadLine());
 
                 Console.Clear();
-                Console.WriteLine($"Sales by Month and Year Report for {salemonth}/{saleyear}");
+                Console.WriteLine($"Sales for {salemonth}/{saleyear}");
                 Console.WriteLine();
                 Console.WriteLine();
 
@@ -178,7 +178,7 @@ namespace CSharp_Project.Controllers
                 int saleyear = Convert.ToInt32(Console.ReadLine());
 
                 Console.Clear();
-                Console.WriteLine($"Total Sales by Year Report for {saleyear}");
+                Console.WriteLine($"Total Sales for {saleyear}");
                 Console.WriteLine();
                 Console.WriteLine();
 
@@ -216,7 +216,7 @@ namespace CSharp_Project.Controllers
                 int saleyear = Convert.ToInt32(Console.ReadLine());
 
                 Console.Clear();
-                Console.WriteLine($"Total Sales by Month and Year Report for {salemonth}/{saleyear}");
+                Console.WriteLine($"Total Sales for {salemonth}/{saleyear}");
                 Console.WriteLine();
                 Console.WriteLine();
 
@@ -252,7 +252,7 @@ namespace CSharp_Project.Controllers
                 int saleyearto = Convert.ToInt32(Console.ReadLine());
 
                 Console.Clear();
-                Console.WriteLine($"Sales Between {saleyearfrom} and {saleyearto} Report");
+                Console.WriteLine($"Sales Between {saleyearfrom} and {saleyearto}");
                 Console.WriteLine();
                 Console.WriteLine();
 
@@ -307,7 +307,7 @@ namespace CSharp_Project.Controllers
                 DateTime dateto = DateTime.Parse($"01/{monthto}/{yearto}").AddMonths(1);
 
                 Console.Clear();
-                Console.WriteLine($"Sales Between {monthfrom}/{yearfrom} and {monthto}/{yearto} Report");
+                Console.WriteLine($"Sales Between {monthfrom}/{yearfrom} and {monthto}/{yearto}");
                 Console.WriteLine();
                 Console.WriteLine();
                 
@@ -330,6 +330,75 @@ namespace CSharp_Project.Controllers
                 continue;
                
                 
+
+            }
+        }
+
+        //Average Sales for a Given Month Over Selected Number of Years Report
+        public void Report7()
+        {
+            bool inReport7 = true;
+            while (inReport7)
+            {
+                Console.Clear();
+                Console.WriteLine("Average Sales for a Given Month Over Selected Number of Years Report");
+                Console.WriteLine();
+                Console.WriteLine("Please type the number for the month that you would like to see:");
+                Console.WriteLine("\n 01: January \n 02: February \n 03: March \n 04: April \n 05: May \n 06: June \n 07: July \n 08: August \n 09: September \n 10: October \n 11: November \n 12: December");
+                Console.WriteLine();
+                int salemonth = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
+                Console.WriteLine("Please type the number of years that you would like to see the average sales over:");
+                Console.WriteLine();
+                int numofyears = Convert.ToInt32(Console.ReadLine());
+
+                Console.Clear();
+                Console.WriteLine($"Average Sales for Month {salemonth} Over {numofyears} Years");
+                Console.WriteLine();
+                Console.WriteLine();
+
+                Average averageSales = saleService.Report7(salemonth,numofyears);
+                Console.WriteLine($"{averageSales}");
+
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.WriteLine();
+                }
+                Console.WriteLine("Press any key to return.");
+                Console.ReadKey();
+                continue;
+
+            }
+        }
+
+        //Average Sales per Month by Year Report
+        public void Report8()
+        {
+            bool inReport8 = true;
+            while (inReport8)
+            {
+                Console.Clear();
+                Console.WriteLine("Average Sales per Month by Year Report");
+                Console.WriteLine();
+                Console.WriteLine("Please type the year that you would like to see:");
+                Console.WriteLine();
+                int saleyear = Convert.ToInt32(Console.ReadLine());
+
+                Console.Clear();
+                Console.WriteLine($"Average Sales per Month for {saleyear}");
+                Console.WriteLine();
+                Console.WriteLine();
+
+                Average averageSales = saleService.Report8(saleyear);
+                Console.WriteLine($"{averageSales}");
+
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.WriteLine();
+                }
+                Console.WriteLine("Press any key to return.");
+                Console.ReadKey();
+                continue;
 
             }
         }
@@ -365,7 +434,6 @@ namespace CSharp_Project.Controllers
 
             }
         }
-
 
         //Month with Lowest Sales by Year Report
         public void Report10()

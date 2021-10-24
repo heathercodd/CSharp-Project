@@ -244,6 +244,44 @@ namespace CSharp_Project.Data.Repositories
             return sales;
         }
 
+        //average sales for a given month over selected number of years report       
+        internal Average Report7(int salemonth, int numofyears)
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            //SQL statement for average sales per month in the year selected by the user
+            command.CommandText = $"SELECT AVG(monthsales) AS averagesales FROM(SELECT year(saledate), SUM(quantity* price) AS monthsales FROM sale WHERE MONTH(saledate) = @salemonth GROUP BY YEAR(saledate) ORDER BY YEAR(saledate) DESC LIMIT @numofyears) AS eachyear";
+            command.Parameters.AddWithValue("@salemonth", salemonth);
+            command.Parameters.AddWithValue("@numofyears", numofyears);
+            Connection.Open();
+            command.Prepare();
+            //read from SQL and assign to the Average class 
+            MySqlDataReader reader = command.ExecuteReader();
+            reader.Read();
+            decimal averagesales = reader.GetFieldValue<decimal>("averagesales");
+            Average average = new Average() { MyAverage = averagesales };
+            Connection.Dispose();
+            return average;
+        }
+
+        //average sales per month by year report
+        internal Average Report8(int saleyear)
+        {
+            MySqlCommand command = Connection.CreateCommand();
+            //SQL statement for average sales per month in the year selected by the user
+            command.CommandText = $"SELECT AVG(monthsales) AS averagesales FROM (SELECT MONTH(saledate) AS months, SUM(quantity*price) AS monthsales FROM sale WHERE YEAR(saledate) = @saleyear GROUP BY months) as monthlysales";
+            command.Parameters.AddWithValue("@saleyear", saleyear);
+            Connection.Open();
+            command.Prepare();
+            //read from SQL and assign to the Average class 
+            MySqlDataReader reader = command.ExecuteReader();
+            reader.Read();
+            decimal averagesales = reader.GetFieldValue<decimal>("averagesales");
+            Average average = new Average() { MyAverage = averagesales };
+            Connection.Dispose();
+            return average;
+
+        }
+
         //month with highest sales by year report
         internal MonthOfYear Report9(int saleyear)
         {
@@ -286,15 +324,8 @@ namespace CSharp_Project.Data.Repositories
             return monthofyear;
         }
 
-
-
-
-
-
-
-
     }
 
 
-        
+
 }

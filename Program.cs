@@ -21,15 +21,16 @@ namespace CSharp_Project
             myMenu.RunMainMenu();
 
             
-            /* 
-             
+            
+            /*
             //creating the sales table in the database 
             MySqlConnection connection = MySqlUtils.GetSqlConnection();
             connection.Open();
             MySqlUtils.RunSchemaFile(Environment.CurrentDirectory + @"\Resources\schema.sql", connection);
             connection.Dispose();
+            */
 
-            */            
+                    
 
 
         }
