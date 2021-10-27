@@ -14,13 +14,11 @@ namespace CSharp_Project
         {
             //console text will be yellow
             Console.ForegroundColor = ConsoleColor.Yellow;
-
-            
+                        
             //runs the main menu 
             SaleMenu myMenu = new SaleMenu(new SaleController(new SaleService(new SaleRepository(MySqlUtils.GetSqlConnection()))));
             myMenu.RunMainMenu();
-
-            
+                       
             
             /*
             //creating the sales table in the database 
@@ -28,9 +26,7 @@ namespace CSharp_Project
             connection.Open();
             MySqlUtils.RunSchemaFile(Environment.CurrentDirectory + @"\Resources\schema.sql", connection);
             connection.Dispose();
-            */
-
-                    
+            */                    
 
 
         }

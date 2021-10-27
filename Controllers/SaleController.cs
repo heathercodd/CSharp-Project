@@ -20,36 +20,67 @@ namespace CSharp_Project.Controllers
         //Data Entry Method
         public void DataEntrySale()
         {
-            //collecting information from the user
-            Console.Clear();
-            Console.WriteLine("New Sale:");
-            Console.WriteLine();
-            Console.WriteLine("What is the product name?");
-            Console.WriteLine();
-            string productname = Console.ReadLine();
-            Console.WriteLine();
-            Console.WriteLine("What is the quantity?");
-            Console.WriteLine();
-            int quantity = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine();
-            Console.WriteLine("What is the price?");
-            Console.WriteLine();
-            decimal price = Convert.ToDecimal(Console.ReadLine());
-            Console.WriteLine();
-           
-            //this is the data to enter
-            Sale dataToEnter = new Sale() { ProductName = productname, Quantity = quantity, Price = price };
-            
-            //passing the data to the service level to be added 
-            Sale myNewSale = saleService.DataEntry(dataToEnter);
+            bool dataEntry = true;
+            while (dataEntry)
+            {
+                //collecting information from the user
+                Console.Clear();
+                Console.WriteLine("New Sale:");
+                Console.WriteLine();
+                Console.WriteLine("What is the product name?");
+                Console.WriteLine();
+                string productname = Console.ReadLine();
+                Console.WriteLine();
+                Console.WriteLine("What is the quantity?");
+                Console.WriteLine();
+                string quantityString = Console.ReadLine();
+                bool quantityInt = int.TryParse(quantityString, out int quantity);
+                if (!quantityInt)
+                {
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Input is not valid.");                    
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to return to the Data Entry screen.");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.ReadKey();
+                    continue;
+                }
+                Console.WriteLine();
+                Console.WriteLine("What is the price?");
+                Console.WriteLine();
+                string priceString = Console.ReadLine();
+                bool priceInt = decimal.TryParse(priceString, out decimal price);
+                if (!priceInt)
+                {
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Input is not valid.");                    
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to return.");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.ReadKey();
+                    continue;
+                }
+                Console.WriteLine();
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"A new sale has been recorded: {myNewSale}");
-            Console.ForegroundColor = ConsoleColor.Yellow;
+                //this is the data to enter
+                Sale dataToEnter = new Sale() { ProductName = productname, Quantity = quantity, Price = price };
+
+                //passing the data to the service level to be added 
+                Sale myNewSale = saleService.DataEntry(dataToEnter);
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"A new sale has been recorded: {myNewSale}");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+
+                dataEntry = false;
+            }            
+
             Console.WriteLine();
             Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadKey();
-
+            
         }
 
         //Report methods
@@ -94,7 +125,14 @@ namespace CSharp_Project.Controllers
                 Console.WriteLine();
                 Console.WriteLine("Please type the year that you would like to see:");
                 Console.WriteLine();
-                int saleyear = Convert.ToInt32(Console.ReadLine());
+
+                string saleyearString = Console.ReadLine();
+                bool saleyearInt = int.TryParse(saleyearString, out int saleyear);
+                if (!saleyearInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
 
                 Console.Clear();
                 Console.WriteLine($"Sales for {saleyear}");
@@ -133,11 +171,26 @@ namespace CSharp_Project.Controllers
                 Console.WriteLine("Please type the number for the month that you would like to see:");
                 Console.WriteLine("\n 01: January \n 02: February \n 03: March \n 04: April \n 05: May \n 06: June \n 07: July \n 08: August \n 09: September \n 10: October \n 11: November \n 12: December");
                 Console.WriteLine();
-                int salemonth = Convert.ToInt32(Console.ReadLine());
+
+                string salemonthString = Console.ReadLine();
+                bool salemonthInt = int.TryParse(salemonthString, out int salemonth);
+                if (!salemonthInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
+
                 Console.WriteLine();
                 Console.WriteLine("Please type the year that you would like to see:");
                 Console.WriteLine();
-                int saleyear = Convert.ToInt32(Console.ReadLine());
+
+                string saleyearString = Console.ReadLine();
+                bool saleyearInt = int.TryParse(saleyearString, out int saleyear);
+                if (!saleyearInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
 
                 Console.Clear();
                 Console.WriteLine($"Sales for {salemonth}/{saleyear}");
@@ -175,13 +228,19 @@ namespace CSharp_Project.Controllers
                 Console.WriteLine();
                 Console.WriteLine("Please type the year that you would like to see:");
                 Console.WriteLine();
-                int saleyear = Convert.ToInt32(Console.ReadLine());
+
+                string saleyearString = Console.ReadLine();
+                bool saleyearInt = int.TryParse(saleyearString, out int saleyear);
+                if (!saleyearInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
 
                 Console.Clear();
                 Console.WriteLine($"Total Sales for {saleyear}");
                 Console.WriteLine();
                 Console.WriteLine();
-
 
                 Total totalSales = saleService.Report3(saleyear);
                 Console.WriteLine($"{totalSales}");
@@ -209,11 +268,26 @@ namespace CSharp_Project.Controllers
                 Console.WriteLine("Please type the number for the month that you would like to see:");
                 Console.WriteLine("\n 01: January \n 02: February \n 03: March \n 04: April \n 05: May \n 06: June \n 07: July \n 08: August \n 09: September \n 10: October \n 11: November \n 12: December");
                 Console.WriteLine();
-                int salemonth = Convert.ToInt32(Console.ReadLine());
+
+                string salemonthString = Console.ReadLine();
+                bool salemonthInt = int.TryParse(salemonthString, out int salemonth);
+                if (!salemonthInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
+
                 Console.WriteLine();
                 Console.WriteLine("Please type the year that you would like to see:");
                 Console.WriteLine();
-                int saleyear = Convert.ToInt32(Console.ReadLine());
+
+                string saleyearString = Console.ReadLine();
+                bool saleyearInt = int.TryParse(saleyearString, out int saleyear);
+                if (!saleyearInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
 
                 Console.Clear();
                 Console.WriteLine($"Total Sales for {salemonth}/{saleyear}");
@@ -245,11 +319,26 @@ namespace CSharp_Project.Controllers
                 Console.WriteLine();
                 Console.WriteLine("Please type the year that you would like to see the sales FROM:");
                 Console.WriteLine();
-                int saleyearfrom = Convert.ToInt32(Console.ReadLine());
+
+                string saleyearfromString = Console.ReadLine();
+                bool saleyearfromInt = int.TryParse(saleyearfromString, out int saleyearfrom);
+                if (!saleyearfromInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
+
                 Console.WriteLine();
                 Console.WriteLine("Please type the year that you would like to see the sales TO:");
                 Console.WriteLine();
-                int saleyearto = Convert.ToInt32(Console.ReadLine());
+
+                string saleyeartoString = Console.ReadLine();
+                bool saleyeartoInt = int.TryParse(saleyeartoString, out int saleyearto);
+                if (!saleyeartoInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
 
                 Console.Clear();
                 Console.WriteLine($"Sales Between {saleyearfrom} and {saleyearto}");
@@ -288,20 +377,51 @@ namespace CSharp_Project.Controllers
                 Console.WriteLine("Please type the number for the month that you would like to see the sales FROM:");
                 Console.WriteLine("\n 01: January \n 02: February \n 03: March \n 04: April \n 05: May \n 06: June \n 07: July \n 08: August \n 09: September \n 10: October \n 11: November \n 12: December");
                 Console.WriteLine();
-                string monthfrom = Console.ReadLine();
+                
+                string monthfromString = Console.ReadLine();
+                bool monthfromInt = int.TryParse(monthfromString, out int monthfrom);
+                if (!monthfromInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
+
                 Console.WriteLine();
                 Console.WriteLine("Please type the year that you would like to see the sales FROM:");
                 Console.WriteLine();
-                string yearfrom = Console.ReadLine();
+
+                string yearfromString = Console.ReadLine();
+                bool yearfromInt = int.TryParse(yearfromString, out int yearfrom);
+                if (!yearfromInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
+
                 Console.WriteLine();
                 Console.WriteLine("Please type the number for the month that you would like to see the sales TO:");
                 Console.WriteLine("\n 01: January \n 02: February \n 03: March \n 04: April \n 05: May \n 06: June \n 07: July \n 08: August \n 09: September \n 10: October \n 11: November \n 12: December");
                 Console.WriteLine();
-                string monthto = Console.ReadLine();
+                
+                string monthtoString = Console.ReadLine();
+                bool monthtoInt = int.TryParse(monthtoString, out int monthto);
+                if (!monthtoInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
+
                 Console.WriteLine();
                 Console.WriteLine("Please type the year that you would like to see the sales TO:");
                 Console.WriteLine();
-                string yearto = Console.ReadLine();
+
+                string yeartoString = Console.ReadLine();
+                bool yeartoInt = int.TryParse(yeartoString, out int yearto);
+                if (!yeartoInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
 
                 DateTime datefrom = DateTime.Parse($"01/{monthfrom}/{yearfrom}");
                 DateTime dateto = DateTime.Parse($"01/{monthto}/{yearto}").AddMonths(1);
@@ -327,9 +447,7 @@ namespace CSharp_Project.Controllers
                 
                 Console.WriteLine("Press any key to return.");
                 Console.ReadKey();
-                continue;
-               
-                
+                continue;                             
 
             }
         }
@@ -346,11 +464,26 @@ namespace CSharp_Project.Controllers
                 Console.WriteLine("Please type the number for the month that you would like to see:");
                 Console.WriteLine("\n 01: January \n 02: February \n 03: March \n 04: April \n 05: May \n 06: June \n 07: July \n 08: August \n 09: September \n 10: October \n 11: November \n 12: December");
                 Console.WriteLine();
-                int salemonth = Convert.ToInt32(Console.ReadLine());
+
+                string salemonthString = Console.ReadLine();
+                bool salemonthInt = int.TryParse(salemonthString, out int salemonth);
+                if (!salemonthInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
+
                 Console.WriteLine();
                 Console.WriteLine("Please type the number of years that you would like to see the average sales over:");
-                Console.WriteLine();
-                int numofyears = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();               
+
+                string numofyearsString = Console.ReadLine();
+                bool numofyearsInt = int.TryParse(numofyearsString, out int numofyears);
+                if (!numofyearsInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
 
                 Console.Clear();
                 Console.WriteLine($"Average Sales for Month {salemonth} Over {numofyears} Years");
@@ -382,7 +515,14 @@ namespace CSharp_Project.Controllers
                 Console.WriteLine();
                 Console.WriteLine("Please type the year that you would like to see:");
                 Console.WriteLine();
-                int saleyear = Convert.ToInt32(Console.ReadLine());
+
+                string saleyearString = Console.ReadLine();
+                bool saleyearInt = int.TryParse(saleyearString, out int saleyear);
+                if (!saleyearInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
 
                 Console.Clear();
                 Console.WriteLine($"Average Sales per Month for {saleyear}");
@@ -414,7 +554,14 @@ namespace CSharp_Project.Controllers
                 Console.WriteLine();
                 Console.WriteLine("Please type the year that you would like to see:");
                 Console.WriteLine();
-                int saleyear = Convert.ToInt32(Console.ReadLine());
+
+                string saleyearString = Console.ReadLine();
+                bool saleyearInt = int.TryParse(saleyearString, out int saleyear);
+                if (!saleyearInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
 
                 Console.Clear();
                 Console.WriteLine($"Month with Highest Sales in {saleyear}");
@@ -446,7 +593,14 @@ namespace CSharp_Project.Controllers
                 Console.WriteLine();
                 Console.WriteLine("Please type the year that you would like to see:");
                 Console.WriteLine();
-                int saleyear = Convert.ToInt32(Console.ReadLine());
+
+                string saleyearString = Console.ReadLine();
+                bool saleyearInt = int.TryParse(saleyearString, out int saleyear);
+                if (!saleyearInt)
+                {
+                    InvalidEntry();
+                    continue;
+                }
 
                 Console.Clear();
                 Console.WriteLine($"Month with Lowest Sales in {saleyear}");
@@ -467,27 +621,21 @@ namespace CSharp_Project.Controllers
             }
         }
 
-
-
-
-
-
+        //Message on invalid user input
+        public void InvalidEntry()
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Input is not valid.");
+            Console.WriteLine();
+            Console.WriteLine("Press any key to return.");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ReadKey();
+        }
 
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 
